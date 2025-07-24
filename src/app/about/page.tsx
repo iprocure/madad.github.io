@@ -19,7 +19,6 @@ export default function AboutPage() {
   return (
     <>
       <StructuredData data={generateStructuredData.organization()} />
-
       <AboutHero />
       <EntrepreneurshipSection />
       <CorePrinciplesSection />

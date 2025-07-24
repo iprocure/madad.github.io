@@ -28,7 +28,7 @@ const Header = () => {
   const pathname = usePathname();
 
   return (
-    <header className="bg-white sticky top-0 z-50 shadow-sm">
+    <header className="bg-white sticky top-0 z-50">
       <div className="w-full border-b border-gray-200">
         <nav className="container mx-auto flex items-center justify-between px-4 py-3">
           {/* Logo and Desktop Navigation */}
