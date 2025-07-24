@@ -10,7 +10,7 @@ const principle = {
 
 export const CorePrinciplesSection = () => {
   return (
-    <section className="bg-gray-50">
+    <section className="bg-[#F3F9F9]">
       <div className="container mx-auto ">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column: Image */}
