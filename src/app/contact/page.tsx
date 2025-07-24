@@ -17,9 +17,7 @@ export default function ContactPage() {
   return (
     <>
       <ContactHero />
-      <ContactInfo />
       <ContactForm />
-      <OfficeDetails />
       <CTASection />
     </>
   );
