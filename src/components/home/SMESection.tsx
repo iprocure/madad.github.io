@@ -1,94 +1,78 @@
-import { BuildingOfficeIcon, TruckIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
+'use client';
 
-const smeTypes = [
+import Image from 'next/image';
+
+// Updated data to match the screenshot's content
+const whoCanApply = [
   {
     id: 1,
-    title: 'Trading Companies',
-    description: 'Perfect for import/export businesses with long payment cycles',
-    icon: BuildingOfficeIcon,
-    benefits: ['Quick cash flow', 'No collateral needed', 'Flexible terms'],
+    title: 'Registered Qatari SME',
+    // Using JSX directly for rich text formatting
+    description: (
+      <>
+        Businesses that are officially registered in Qatar, has revenue &lt;{' '}
+        <span className="font-semibold text-gray-800">QAR 100 million</span> and has{' '}
+        <span className="font-semibold text-gray-800">employees &lt; 250</span>, are eligible to apply.
+      </>
+    ),
+    iconSrc: '/home/trends.svg',
   },
   {
     id: 2,
-    title: 'Manufacturing',
-    description: 'Ideal for manufacturers waiting for customer payments',
-    icon: Cog6ToothIcon,
-    benefits: ['Working capital', 'Scale operations', 'Meet deadlines'],
+    title: 'Serving Priority Sector',
+    description: "Whether you're importing goods, running a factory, or providing professional services — Madad is for you.",
+    iconSrc: '/home/a-sync.svg',
   },
   {
     id: 3,
-    title: 'Logistics & Transport',
-    description: 'Support for logistics companies with outstanding invoices',
-    icon: TruckIcon,
-    benefits: ['Fuel costs', 'Vehicle maintenance', 'Driver payments'],
+    title: 'Has Creditworthy Buyers',
+    description: 'If you hold invoices raised to larger corporations and government bodies. As long as your invoices are valid and due within 90 days.',
+    iconSrc: '/home/ic_layers_48px.svg',
   },
 ];
 
 export const SMESection = () => {
   return (
-    <section className="bg-white py-16 lg:py-24">
+    <section className="bg-[#F3F9F9] py-16 lg:py-24">
       <div className="container mx-auto px-4 lg:px-8">
+        {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <h3 className="text-sm font-bold text-green-700 tracking-wider uppercase mb-3">
+            Who Can Apply
+          </h3>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
             Built for SME enterprises like yours
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            Whether you&apos;re a trading company, manufacturer, or service provider,
-            we understand your unique cash flow challenges
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-          {smeTypes.map((sme) => (
+        {/* Content Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
+          {whoCanApply.map((card) => (
             <div
-              key={sme.id}
-              className="bg-gray-50 rounded-2xl p-6 lg:p-8 hover:bg-gray-100 transition-colors duration-300"
+              key={card.id}
+              className="bg-white rounded-lg p-6 border border-gray-200/75 shadow-sm"
             >
-              <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-xl mb-6">
-                <sme.icon className="w-8 h-8 text-green-600" />
+              {/* Icon */}
+              <div className="mb-4">
+                <Image
+                  src={card.iconSrc}
+                  alt={`${card.title} icon`}
+                  width={36}
+                  height={36}
+                />
               </div>
               
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
-                {sme.title}
+              {/* Title */}
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                {card.title}
               </h3>
               
-              <p className="text-gray-600 mb-6">
-                {sme.description}
+              {/* Description */}
+              <p className="text-gray-500 text-sm leading-relaxed">
+                {card.description}
               </p>
-
-              <div className="space-y-2">
-                <h4 className="text-sm font-semibold text-gray-900 mb-3">
-                  Key Benefits:
-                </h4>
-                {sme.benefits.map((benefit, index) => (
-                  <div key={index} className="flex items-center space-x-2">
-                    <div className="w-1.5 h-1.5 bg-green-600 rounded-full"></div>
-                    <span className="text-sm text-gray-600">{benefit}</span>
-                  </div>
-                ))}
-              </div>
             </div>
           ))}
-        </div>
-
-        {/* Stats Section */}
-        <div className="mt-16 lg:mt-20">
-          <div className="bg-green-600 rounded-2xl p-8 lg:p-12 text-white">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-              <div>
-                <div className="text-3xl lg:text-4xl font-bold mb-2">500+</div>
-                <div className="text-green-100">SMEs Funded</div>
-              </div>
-              <div>
-                <div className="text-3xl lg:text-4xl font-bold mb-2">$50M+</div>
-                <div className="text-green-100">Total Funding</div>
-              </div>
-              <div>
-                <div className="text-3xl lg:text-4xl font-bold mb-2">24hrs</div>
-                <div className="text-green-100">Average Approval</div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
