@@ -47,7 +47,7 @@ export const WhyChooseMadadSection = () => {
           </h2>
         </div>
 
-        {/* Features Grid */}
+        {/* Features Grid*/}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
           {features.map((feature) => (
             <div 
