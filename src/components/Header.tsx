@@ -1,11 +1,19 @@
 // src/components/Header.tsx
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useMobileMenu } from '@/hooks/useMobileMenu'; // Assuming this hook exists
+
+// Custom hook for mobile menu state management
+const useMobileMenu = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
+  const close = () => setIsOpen(false);
+  return { isOpen, toggle, close };
+};
+
 
 // Define navigation items based on the screenshot
 const NAV_ITEMS = [
@@ -19,38 +27,34 @@ const Header = () => {
   const { isOpen: isMobileMenuOpen, toggle: toggleMobileMenu, close: closeMobileMenu } = useMobileMenu();
   const pathname = usePathname();
 
-  // This state is no longer needed if the banner is on every page or controlled differently
-  // const [showSandboxBanner, setShowSandboxBanner] = useState(false);
-  // useEffect(() => {
-  //   const path = window.location.pathname;
-  //   if (path === '/' || path === '/index.html') {
-  //     setShowSandboxBanner(true);
-  //   }
-  // }, []);
-
   return (
     <header className="bg-white sticky top-0 z-50 shadow-sm">
-      {/* The banner from the old code is not in the new screenshot's header, but keeping for context if needed */}
-      {/* <div id="sandboxBanner" className="bg-yellow-50 ..."> ... </div> */}
-
       <div className="w-full border-b border-gray-200">
-        <nav className="container mx-auto flex items-center justify-between px-4 py-0">
+        <nav className="container mx-auto flex items-center justify-between px-4 py-3">
+          {/* Logo and Desktop Navigation */}
           <div className="flex items-center">
-            <Link href="/" onClick={closeMobileMenu}>
+            <Link href="/" onClick={closeMobileMenu} className='scale-150'>
               <Image 
                 src="/logo_top.png" // As seen in screenshot
                 alt="Madad Logo" 
-                width={100/1.8}
-                height={33/1.8}
+                width={90/2} // Adjusted size for better visual balance
+                height={30/2}
                 priority
               />
             </Link>
             
             {/* Desktop Menu */}
-            <ul className="hidden md:flex items-center space-x-8 ml-10">
+            <ul className="hidden md:flex items-center space-x-8 ml-12">
               {NAV_ITEMS.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="text-gray-700 font-medium hover:text-green-600 transition-colors">
+                  <Link 
+                    href={item.href} 
+                    className={`text-sm font-medium transition-colors ${
+                      pathname === item.href 
+                      ? 'text-green-600' 
+                      : 'text-gray-700 hover:text-green-600'
+                    }`}
+                  >
                     {item.label}
                   </Link>
                 </li>
@@ -59,20 +63,16 @@ const Header = () => {
           </div>
 
           {/* Desktop Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-3">
             <Link
               href="/contact"
-              className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors ${
-                pathname === '/contact' 
-                ? 'bg-white text-green-600 border border-green-600' 
-                : 'bg-transparent text-gray-700 hover:bg-gray-100'
-              }`}
+              className="px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-300 border border-green-500 bg-white text-green-500 hover:bg-green-500 hover:text-white"
             >
               Contact Us
             </Link>
             <Link
               href="/register"
-              className="bg-green-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-green-700 transition-colors"
+              className="bg-[#0D3D3F] text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition-colors"
             >
               Register
             </Link>
@@ -107,11 +107,19 @@ const Header = () => {
               </Link>
             </li>
           ))}
-          <li className="pt-4 border-t border-gray-200">
+          {/* Separator and buttons for mobile */}
+          <li className="pt-4 mt-2 border-t border-gray-200 flex flex-col space-y-3">
+             <Link
+              href="/contact"
+              onClick={closeMobileMenu}
+              className="w-full text-center border border-green-500 text-green-500 px-5 py-3 rounded-lg font-semibold hover:bg-green-500 hover:text-white transition-colors block"
+            >
+              Contact Us
+            </Link>
             <Link
               href="/register"
               onClick={closeMobileMenu}
-              className="w-full text-center bg-green-600 text-white px-5 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors block"
+              className="w-full text-center bg-[#0D3D3F] text-white px-5 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-colors block"
             >
               Register
             </Link>
