@@ -49,7 +49,6 @@ export const AboutHero = () => {
                 innovation, and diversify industries.
               </span>
               <br/>
-              <div className='my-6'></div>
               <span>
                 Every small business deserves the chance to thrive, free from cash flow constraints.
                 We believe in community and collaboration, creating solutions based on real business

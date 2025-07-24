@@ -18,7 +18,7 @@ const useMobileMenu = () => {
 // Define navigation items based on the screenshot
 const NAV_ITEMS = [
   { label: 'About Us', href: '/about' },
-  { label: 'Pricing', href: '/pricing' },
+  // { label: 'Pricing', href: '/pricing' },
   { label: 'Invoice Discounting', href: '/invoice-discounting' },
   { label: "FAQ's", href: '/faq' },
 ];
